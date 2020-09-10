@@ -6,11 +6,36 @@
 
 {% block breadcrumb %}
 	<li class="breadcrumb-item">
-		<a href="{% url 'home' %}">Boards</a>
+		<a href="{% url 'boards' %}">Boards</a>
 	</li>
 	<li class="breadcrumb-item active">{{ board.name }}</li>
 {% endblock %}
 
 {% block content %}
-
+	<div class="mb-3 mt-5">
+		<a class="btn btn-info" href="{% url 'new_topic' board.pk %}">New Topic</a>
+	</div>
+	
+	<table class="table">
+		<thead class="table-dark">
+			<tr>
+				<th>Topic</th>
+				<th>Starter</th>
+				<th>Replies</th>
+				<th>Views</th>
+				<th>Last Update</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for topic in topics %}
+				<tr>
+					<td>{{ topic.subject }}</td>
+					<td>{{ topic.starter.username }}</td>
+					<td>0</td>
+					<td>0</td>
+					<td>{{ topic.last_updated }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}
